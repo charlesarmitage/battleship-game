@@ -14,11 +14,7 @@ public class DeploymentController {
     }
 
     public void selectCell(int x, int y) {
-        if(!model.isCellSelected(x, y)){
-            model.selectCell(x, y);
-        }
-        else {
-            model.clearCell(x,y);
-        }
+        model.pickCell(x, y);
+        view.displayGrid(model.getGrid());
     }
 }

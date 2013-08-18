@@ -11,19 +11,28 @@ public class DeploymentModel {
         }
     }
 
-    public boolean isCellSelected(int x, int y) {
+    public CellType[][] getGrid() {
+        return grid;
+    }
+
+    public void pickCell(int x, int y){
+        if(!isCellSelected(x, y)){
+            selectCell(x, y);
+        }
+        else {
+            clearCell(x, y);
+        }
+    }
+
+    private boolean isCellSelected(int x, int y) {
         return grid[x][y] == CellType.SELECTED;
     }
 
-    public void selectCell(int x, int y) {
+    private void selectCell(int x, int y) {
         grid[x][y] = CellType.SELECTED;
     }
 
-    public void clearCell(int x, int y) {
+    private void clearCell(int x, int y) {
         grid[x][y] = CellType.EMPTY;
-    }
-
-    public CellType[][] getGrid() {
-        return grid;
     }
 }
