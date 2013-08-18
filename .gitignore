@@ -1,0 +1,10 @@
+# Idea files
+/.idea/workspace.xml
+
+# Java class files
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
