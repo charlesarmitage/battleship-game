@@ -42,11 +42,17 @@ public class DeploymentModel {
         adjacentCells.add(new Position(x, y+1));
 
         for(Position cell : adjacentCells){
-            if(isCellSelected(cell.x, cell.y)){
-                return true;
+            if(isInBounds(cell.x, cell.y)) {
+                if(isCellSelected(cell.x, cell.y)){
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    private boolean isInBounds(int x, int y) {
+        return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
     private boolean isNoSelectionMade() {
