@@ -49,4 +49,14 @@ public class SecondCellSelectionTests extends DeploymentScenarios{
         Assert.assertEquals(CellType.SELECTED, testView.latestGrid[4][5]);
         assertOtherCellsEmpty(new Position[]{new Position(4,5), new Position(4,4)});
     }
+
+    @Test
+    public void selectNonAdjacentCells(){
+        deploymentController.selectCell(2, 4);
+        deploymentController.selectCell(4, 2);
+        deploymentController.selectCell(6, 4);
+        deploymentController.selectCell(4, 6);
+
+        assertOtherCellsEmpty(new Position[]{new Position(4,4)});
+    }
 }
