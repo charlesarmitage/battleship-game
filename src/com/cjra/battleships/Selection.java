@@ -6,14 +6,24 @@ import java.util.List;
 public class Selection {
     private final List<Position> selections = new ArrayList<Position>();
 
-    public boolean isEmpty(){
-
-        return selections.size() == 0;
+    public Iterable<? extends Position> getPositions() {
+        return selections;
     }
 
     public void select(int x, int y){
 
-        selections.add(new Position(x, y));
+        if(isEmpty() || isAdjacentToSelection(x, y)) {
+            selections.add(new Position(x, y));
+        }
+    }
+
+    public void clear(int x, int y) {
+        for(Position selection : selections){
+            if(selection.x == x && selection.y == y){
+                selections.remove(selection);
+                return;
+            }
+        }
     }
 
     public boolean isSelected(int x, int y) {
@@ -26,16 +36,12 @@ public class Selection {
         return false;
     }
 
-    public void clear(int x, int y) {
-        for(Position selection : selections){
-            if(selection.x == x && selection.y == y){
-                selections.remove(selection);
-                return;
-            }
-        }
+    private boolean isEmpty(){
+
+        return selections.size() == 0;
     }
 
-    public boolean isAdjacentToSelection(int x, int y) {
+    private boolean isAdjacentToSelection(int x, int y) {
         List<Position> adjacentCells = new ArrayList<Position>();
         adjacentCells.add(new Position(x-1, y));
         adjacentCells.add(new Position(x, y-1));
@@ -54,9 +60,5 @@ public class Selection {
 
     private boolean isInBounds(int x, int y) {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
-    }
-
-    public Iterable<? extends Position> getPositions() {
-        return selections;
     }
 }
