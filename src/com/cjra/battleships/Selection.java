@@ -16,7 +16,7 @@ public class Selection {
     public void select(int x, int y){
 
         if(isPotentialSelection(x, y)) {
-            selections.add(new Position(x, y));
+            addSelection(x, y);
             updatePotentialSelections(x, y);
         }
     }
@@ -64,27 +64,31 @@ public class Selection {
         return false;
     }
 
+    private void addSelection(int x, int y) {
+
+        selections.add(new Position(x, y));
+        if(selections.size() > 1){
+            sortSelections();
+        }
+    }
+
     private void updatePotentialSelections(int x, int y) {
+
+        potentialSelections.clear();
+        Position start = selections.get(0);
+        Position end = selections.get(selections.size()-1);
+
         if(selections.size() == 1){
-            addPotentialSelection(x - 1, y);
-            addPotentialSelection(x, y - 1);
-            addPotentialSelection(x + 1, y);
-            addPotentialSelection(x, y + 1);
+            addPotentialVerticalSelections(start, end);
+            addPotentialHorizontalSelections(start, end);
         }
 
         if(selections.size() > 1){
-            sortSelections();
-
-            Position start = selections.get(0);
-            Position end = selections.get(selections.size()-1);
-            potentialSelections.clear();
             if(isVertical()){
-                addPotentialSelection(start.x, start.y - 1);
-                addPotentialSelection(end.x, end.y + 1);
+                addPotentialVerticalSelections(start, end);
             }
             else if(isHorizontal()){
-                addPotentialSelection(start.x - 1, start.y);
-                addPotentialSelection(end.x + 1, end.y);
+                addPotentialHorizontalSelections(start, end);
             }
         }
     }
@@ -95,6 +99,16 @@ public class Selection {
 
     private boolean isVertical() {
         return selections.get(0).x == selections.get(1).x;
+    }
+
+    private void addPotentialHorizontalSelections(Position start, Position end) {
+        addPotentialSelection(start.x - 1, start.y);
+        addPotentialSelection(end.x + 1, end.y);
+    }
+
+    private void addPotentialVerticalSelections(Position start, Position end) {
+        addPotentialSelection(start.x, start.y - 1);
+        addPotentialSelection(end.x, end.y + 1);
     }
 
     private void addPotentialSelection(int x, int y) {
