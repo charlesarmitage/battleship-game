@@ -2,9 +2,13 @@ package com.cjra.battleships;
 
 import junit.framework.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DeploymentScenarios {
     public final TestView testView;
     public final DeploymentController deploymentController;
+    protected final List<Position> expectedSelections = new ArrayList<Position>();
 
     public DeploymentScenarios(){
         testView = new TestView();

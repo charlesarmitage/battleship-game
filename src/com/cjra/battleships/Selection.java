@@ -78,9 +78,23 @@ public class Selection {
             Position start = selections.get(0);
             Position end = selections.get(selections.size()-1);
             potentialSelections.clear();
-            addPotentialSelection(start.x, start.y - 1);
-            addPotentialSelection(end.x, end.y + 1);
+            if(isVertical()){
+                addPotentialSelection(start.x, start.y - 1);
+                addPotentialSelection(end.x, end.y + 1);
+            }
+            else if(isHorizontal()){
+                addPotentialSelection(start.x - 1, start.y);
+                addPotentialSelection(end.x + 1, end.y);
+            }
         }
+    }
+
+    private boolean isHorizontal() {
+        return selections.get(0).y == selections.get(1).y;
+    }
+
+    private boolean isVertical() {
+        return selections.get(0).x == selections.get(1).x;
     }
 
     private void addPotentialSelection(int x, int y) {
@@ -96,10 +110,14 @@ public class Selection {
     }
 
     private void sortSelections(){
-        Collections.sort(selections, new Comparator<Position>() {
+        Collections.sort(selections, getVerticalComparator());
+    }
+
+    private Comparator<Position> getVerticalComparator() {
+        return new Comparator<Position>() {
             public int compare(Position one, Position other) {
                 return one.y - other.y;
             }
-        });
+        };
     }
 }

@@ -9,8 +9,6 @@ import java.util.List;
 
 public class VerticalSelectionTests extends DeploymentScenarios {
 
-    private final List<Position> expectedSelections = new ArrayList<Position>();
-
     @Before
     public void selectTwoCells(){
         selectInitialCell(4,4);
