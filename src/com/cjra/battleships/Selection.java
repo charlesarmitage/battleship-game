@@ -1,6 +1,8 @@
 package com.cjra.battleships;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Selection {
@@ -20,6 +22,7 @@ public class Selection {
     }
 
     public void clear(int x, int y) {
+
         for(Position selection : selections){
             if(selection.matches(x, y)){
                 selections.remove(selection);
@@ -68,7 +71,10 @@ public class Selection {
             addPotentialSelection(x + 1, y);
             addPotentialSelection(x, y + 1);
         }
+
         if(selections.size() > 1){
+            sortSelections();
+
             Position start = selections.get(0);
             Position end = selections.get(selections.size()-1);
             potentialSelections.clear();
@@ -87,5 +93,13 @@ public class Selection {
 
     private boolean isInBounds(int x, int y) {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
+    }
+
+    private void sortSelections(){
+        Collections.sort(selections, new Comparator<Position>() {
+            public int compare(Position one, Position other) {
+                return one.y - other.y;
+            }
+        });
     }
 }

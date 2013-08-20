@@ -7,7 +7,7 @@ import org.junit.Before;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThirdCellSelectionTests extends DeploymentScenarios {
+public class VerticalSelectionTests extends DeploymentScenarios {
 
     private final List<Position> expectedSelections = new ArrayList<Position>();
 
@@ -20,7 +20,7 @@ public class ThirdCellSelectionTests extends DeploymentScenarios {
     }
 
     @Test
-    public void  selectCellAtBottom(){
+    public void  selectThirdCellAtBottom(){
         deploymentController.selectCell(4,6);
 
         Assert.assertEquals(CellType.SELECTED, testView.latestGrid[4][6]);
@@ -30,7 +30,7 @@ public class ThirdCellSelectionTests extends DeploymentScenarios {
     }
 
     @Test
-    public void selectCellAtTop(){
+    public void selectThirdCellAtTop(){
         deploymentController.selectCell(4,3);
 
         Assert.assertEquals(CellType.SELECTED, testView.latestGrid[4][3]);
@@ -40,7 +40,7 @@ public class ThirdCellSelectionTests extends DeploymentScenarios {
     }
 
     @Test
-    public void selectCellToRight(){
+    public void selectThirdCellToRight(){
         deploymentController.selectCell(5,4);
 
         Assert.assertEquals(CellType.EMPTY, testView.latestGrid[5][4]);
@@ -48,10 +48,32 @@ public class ThirdCellSelectionTests extends DeploymentScenarios {
     }
 
     @Test
-    public void selectCellToLeft(){
+    public void selectThirdCellToLeft(){
         deploymentController.selectCell(3,4);
 
         Assert.assertEquals(CellType.EMPTY, testView.latestGrid[3][4]);
+        assertOtherCellsEmpty(expectedSelections.toArray(new Position[0]));
+    }
+
+    @Test
+    public void selectFourthCellAtBottom(){
+        selectThirdCellAtTop();
+
+        deploymentController.selectCell(4,6);
+
+        expectedSelections.add(new Position(4,6));
+        Assert.assertEquals(CellType.SELECTED, testView.latestGrid[4][6]);
+        assertOtherCellsEmpty(expectedSelections.toArray(new Position[0]));
+    }
+
+    @Test
+    public void selectFourthCellAtTop(){
+        selectThirdCellAtBottom();
+
+        deploymentController.selectCell(4,3);
+
+        Assert.assertEquals(CellType.SELECTED, testView.latestGrid[4][3]);
+        expectedSelections.add(new Position(4,3));
         assertOtherCellsEmpty(expectedSelections.toArray(new Position[0]));
     }
 }
