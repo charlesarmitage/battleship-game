@@ -35,4 +35,38 @@ public class HorizontalSelectionTests extends DeploymentScenarios {
         Assert.assertEquals(CellType.SELECTED, testView.latestGrid[6][4]);
         expectedSelections.add(new Position(6,4));
     }
+
+    @Test
+    public void selectThirdCellAbove(){
+        deploymentController.selectCell(4,3);
+
+        Assert.assertEquals(CellType.EMPTY, testView.latestGrid[4][3]);
+    }
+
+    @Test
+    public void selectThirdCellBelow(){
+        deploymentController.selectCell(4,5);
+
+        Assert.assertEquals(CellType.EMPTY, testView.latestGrid[4][5]);
+    }
+
+    @Test
+    public void selectFourthCellToRight(){
+        selectThirdCellToLeft();
+
+        deploymentController.selectCell(6,4);
+
+        Assert.assertEquals(CellType.SELECTED, testView.latestGrid[6][4]);
+        expectedSelections.add(new Position(6,4));
+    }
+
+    @Test
+    public void selectFourthCellToLeft(){
+        selectThirdCellToRight();
+
+        deploymentController.selectCell(3,4);
+
+        Assert.assertEquals(CellType.SELECTED, testView.latestGrid[3][4]);
+        expectedSelections.add(new Position(3,4));
+    }
 }

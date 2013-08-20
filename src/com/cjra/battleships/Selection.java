@@ -110,7 +110,21 @@ public class Selection {
     }
 
     private void sortSelections(){
-        Collections.sort(selections, getVerticalComparator());
+        if(isVertical()){
+            Collections.sort(selections, getVerticalComparator());
+        }
+        else if(isHorizontal()){
+            Collections.sort(selections, getHorizontalComparator());
+        }
+    }
+
+    private Comparator<Position> getHorizontalComparator() {
+        return new Comparator<Position>() {
+            @Override
+            public int compare(Position one, Position other) {
+                return one.x - other.y;
+            }
+        };
     }
 
     private Comparator<Position> getVerticalComparator() {
