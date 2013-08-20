@@ -23,11 +23,14 @@ public class Selection {
 
     public void clear(int x, int y) {
 
-        for(Position selection : selections){
-            if(selection.matches(x, y)){
-                selections.remove(selection);
-                return;
-            }
+        Position start = selections.get(0);
+        Position end = selections.get(selections.size()-1);
+
+        if(start.matches(x,y)){
+            selections.remove(start);
+        }
+        else if(end.matches(x,y)){
+            selections.remove(end);
         }
     }
 
