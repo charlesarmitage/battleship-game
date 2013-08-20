@@ -8,4 +8,9 @@ public class Position {
         this.x = x;
         this.y = y;
     }
+
+    public boolean matches(int x, int y){
+        return this.x == x && this.y == y;
+    }
 }
+
