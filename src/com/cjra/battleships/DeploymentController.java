@@ -18,7 +18,7 @@ public class DeploymentController {
         view.displayGrid(model.getGrid());
 
         if(model.isShipReadyToPlace()){
-            view.offerPatrolBoatPlacement();
+            view.offerShipPlacement(model.getShipOffer());
         }
     }
 }

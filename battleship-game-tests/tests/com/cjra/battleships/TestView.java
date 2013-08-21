@@ -6,6 +6,7 @@ import java.util.List;
 public class TestView implements DeploymentView {
     public CellType[][] latestGrid;
     public boolean offerPatrolBoatCalled = false;
+    public ShipType offeredShip = ShipType.NONE;
 
     @Override
     public void displayGrid(CellType[][] grid) {
@@ -15,5 +16,10 @@ public class TestView implements DeploymentView {
     @Override
     public void offerPatrolBoatPlacement() {
         offerPatrolBoatCalled = true;
+    }
+
+    @Override
+    public void offerShipPlacement(ShipType ship) {
+        offeredShip = ship;
     }
 }

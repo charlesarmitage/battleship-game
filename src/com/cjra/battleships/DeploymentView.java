@@ -4,4 +4,5 @@ public interface DeploymentView {
 
     public void displayGrid(CellType [][] grid);
     public void offerPatrolBoatPlacement();
+    public void offerShipPlacement(ShipType destroyer);
 }

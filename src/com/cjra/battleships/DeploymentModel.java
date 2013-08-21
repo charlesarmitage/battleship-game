@@ -22,7 +22,7 @@ public class DeploymentModel {
     }
 
     public boolean isShipReadyToPlace() {
-        return selection.size() == 2;
+        return selection.size() >= 2;
     }
 
     private CellType[][] buildGrid() {
@@ -33,5 +33,17 @@ public class DeploymentModel {
             }
         }
         return grid;
+    }
+
+    public ShipType getShipOffer() {
+        if(selection.size() == 2){
+            return ShipType.PATROL_BOAT;
+        }
+        else if(selection.size() == 3){
+            return  ShipType.DESTROYER;
+        }
+        else {
+            return ShipType.NONE;
+        }
     }
 }
