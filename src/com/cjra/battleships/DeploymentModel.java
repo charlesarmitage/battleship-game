@@ -21,6 +21,10 @@ public class DeploymentModel {
         }
     }
 
+    public boolean isShipReadyToPlace() {
+        return selection.size() == 2;
+    }
+
     private CellType[][] buildGrid() {
         CellType[][] grid = new CellType[10][10];
         for(int x = 0; x < 10; x++){

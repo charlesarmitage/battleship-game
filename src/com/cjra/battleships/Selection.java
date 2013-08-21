@@ -9,6 +9,10 @@ public class Selection {
     private final List<Position> selections = new ArrayList<Position>();
     private final List<Position> potentialSelections = new ArrayList<Position>();
 
+    public int size() {
+        return selections.size();
+    }
+
     public Iterable<? extends Position> getPositions() {
         return selections;
     }

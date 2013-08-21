@@ -74,4 +74,15 @@ public class VerticalSelectionTests extends DeploymentScenarios {
         expectedSelections.add(new Position(4,3));
         assertOtherCellsEmpty(expectedSelections.toArray(new Position[0]));
     }
+
+    @Test
+    public void selectFiveCells(){
+        selectFourthCellAtTop();
+
+        deploymentController.selectCell(4,7);
+
+        expectedSelections.add(new Position(4,7));
+        Assert.assertEquals(CellType.SELECTED, testView.latestGrid[4][7]);
+        assertOtherCellsEmpty(expectedSelections.toArray(new Position[0]));
+    }
 }

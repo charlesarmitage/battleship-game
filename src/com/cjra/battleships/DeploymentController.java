@@ -16,5 +16,9 @@ public class DeploymentController {
     public void selectCell(int x, int y) {
         model.pickCell(x, y);
         view.displayGrid(model.getGrid());
+
+        if(model.isShipReadyToPlace()){
+            view.offerPatrolBoatPlacement();
+        }
     }
 }
