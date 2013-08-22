@@ -3,6 +3,7 @@ package com.cjra.battleships;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 public class ShipPlacementTests extends VerticalSelectionTests {
@@ -48,5 +49,31 @@ public class ShipPlacementTests extends VerticalSelectionTests {
         selectFiveCells();
 
         assertEquals(ShipType.AIRCRAFT_CARRIER, testView.offeredShip);
+    }
+
+    @Test
+    public void allShipsAvailableToPlace(){
+
+        assertTrue(testView.availableShips.contains(ShipType.PATROL_BOAT));
+        assertTrue(testView.availableShips.contains(ShipType.DESTROYER));
+        assertTrue(testView.availableShips.contains(ShipType.BATTLESHIP));
+        assertTrue(testView.availableShips.contains(ShipType.AIRCRAFT_CARRIER));
+    }
+
+    @Test
+    public void placeDestroyer(){
+        placeDestroyerOffered();
+
+        deploymentController.placeShip(ShipType.DESTROYER);
+
+        assertFalse(testView.availableShips.contains(ShipType.DESTROYER));
+    }
+
+    @Test
+    public void cannotPlaceShipOnEmptySelection(){
+        deploymentController.resetGrid();
+        deploymentController.placeShip(ShipType.DESTROYER);
+
+        assertTrue(testView.availableShips.contains(ShipType.DESTROYER));
     }
 }

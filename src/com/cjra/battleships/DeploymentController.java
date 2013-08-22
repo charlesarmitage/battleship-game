@@ -19,8 +19,14 @@ public class DeploymentController {
         updateView();
     }
 
+    public void placeShip(ShipType ship) {
+        model.placeShip(ship);
+        updateView();
+    }
+
     private void updateView() {
         view.displayGrid(model.getGrid());
         view.offerShipPlacement(model.getShipOffer());
+        view.displayAvailableShips(model.getAvailableShips());
     }
 }

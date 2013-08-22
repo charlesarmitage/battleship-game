@@ -1,7 +1,20 @@
 package com.cjra.battleships;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 public class DeploymentModel {
     private Selection selection = new Selection();
+    private List<ShipType> availableShips = new ArrayList<ShipType>();
+
+    public DeploymentModel(){
+        availableShips.add(ShipType.PATROL_BOAT);
+        availableShips.add(ShipType.DESTROYER);
+        availableShips.add(ShipType.BATTLESHIP);
+        availableShips.add(ShipType.AIRCRAFT_CARRIER);
+    }
 
     public void reset() {
         selection = new Selection();
@@ -23,20 +36,6 @@ public class DeploymentModel {
         else {
             selection.clear(x, y);
         }
-    }
-
-    public boolean isShipReadyToPlace() {
-        return selection.size() >= 2;
-    }
-
-    private CellType[][] buildGrid() {
-        CellType[][] grid = new CellType[10][10];
-        for(int x = 0; x < 10; x++){
-            for(int y = 0; y < 10; y++){
-                grid[x][y] = CellType.EMPTY;
-            }
-        }
-        return grid;
     }
 
     public ShipType getShipOffer() {
@@ -62,5 +61,26 @@ public class DeploymentModel {
         }
 
         return type;
+    }
+
+    public void placeShip(ShipType ship) {
+
+        if(getShipOffer() == ship){
+            availableShips.remove(ship);
+        }
+    }
+
+    public Collection<ShipType> getAvailableShips() {
+        return Collections.unmodifiableCollection(availableShips);
+    }
+
+    private CellType[][] buildGrid() {
+        CellType[][] grid = new CellType[10][10];
+        for(int x = 0; x < 10; x++){
+            for(int y = 0; y < 10; y++){
+                grid[x][y] = CellType.EMPTY;
+            }
+        }
+        return grid;
     }
 }
