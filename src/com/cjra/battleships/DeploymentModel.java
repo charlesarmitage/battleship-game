@@ -3,6 +3,10 @@ package com.cjra.battleships;
 public class DeploymentModel {
     private Selection selection = new Selection();
 
+    public void reset() {
+        selection = new Selection();
+    }
+
     public CellType[][] getGrid() {
         CellType[][] currentGrid = buildGrid();
         for(Position position : selection.getPositions()){
@@ -36,14 +40,27 @@ public class DeploymentModel {
     }
 
     public ShipType getShipOffer() {
-        if(selection.size() == 2){
-            return ShipType.PATROL_BOAT;
+
+        ShipType type = ShipType.NONE;
+
+        switch(selection.size())
+        {
+            case 2:
+                type = ShipType.PATROL_BOAT;
+                break;
+            case 3:
+                type = ShipType.DESTROYER;
+                break;
+            case 4:
+                type = ShipType.BATTLESHIP;
+                break;
+            case 5:
+                type = ShipType.AIRCRAFT_CARRIER;
+                break;
+            default:
+                break;
         }
-        else if(selection.size() == 3){
-            return  ShipType.DESTROYER;
-        }
-        else {
-            return ShipType.NONE;
-        }
+
+        return type;
     }
 }

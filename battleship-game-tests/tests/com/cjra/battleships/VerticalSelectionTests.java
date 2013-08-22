@@ -85,4 +85,11 @@ public class VerticalSelectionTests extends DeploymentScenarios {
         Assert.assertEquals(CellType.SELECTED, testView.latestGrid[4][7]);
         assertOtherCellsEmpty(expectedSelections.toArray(new Position[0]));
     }
+
+    @Test
+    public void resetGridClearsGrid(){
+        resetGrid();
+
+        assertOtherCellsEmpty(new Position[0]);
+    }
 }

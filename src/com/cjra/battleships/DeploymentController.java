@@ -10,15 +10,17 @@ public class DeploymentController {
     }
 
     public void resetGrid() {
-        view.displayGrid(model.getGrid());
+        model.reset();
+        updateView();
     }
 
     public void selectCell(int x, int y) {
         model.pickCell(x, y);
-        view.displayGrid(model.getGrid());
+        updateView();
+    }
 
-        if(model.isShipReadyToPlace()){
-            view.offerShipPlacement(model.getShipOffer());
-        }
+    private void updateView() {
+        view.displayGrid(model.getGrid());
+        view.offerShipPlacement(model.getShipOffer());
     }
 }
