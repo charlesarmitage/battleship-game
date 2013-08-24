@@ -27,8 +27,8 @@ public class Selection {
 
     public void clear(int x, int y) {
 
-        Position start = selections.get(0);
-        Position end = selections.get(selections.size()-1);
+        Position start = start();
+        Position end = end();
 
         if(start.matches(x,y)){
             selections.remove(start);
@@ -90,20 +90,18 @@ public class Selection {
     private void updatePotentialSelections(int x, int y) {
 
         potentialSelections.clear();
-        Position start = selections.get(0);
-        Position end = selections.get(selections.size()-1);
 
         if(selections.size() == 1){
-            addPotentialVerticalSelections(start, end);
-            addPotentialHorizontalSelections(start, end);
+            addPotentialVerticalSelections(start(), end());
+            addPotentialHorizontalSelections(start(), end());
         }
 
         if(selections.size() > 1){
             if(isVertical()){
-                addPotentialVerticalSelections(start, end);
+                addPotentialVerticalSelections(start(), end());
             }
             else if(isHorizontal()){
-                addPotentialHorizontalSelections(start, end);
+                addPotentialHorizontalSelections(start(), end());
             }
         }
     }
