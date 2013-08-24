@@ -2,16 +2,17 @@ package com.cjra.battleships;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class TestView implements DeploymentView {
     public CellType[][] latestGrid;
     public ShipType offeredShip = ShipType.NONE;
     public Collection<ShipType> availableShips = new ArrayList<ShipType>();
+    public Ship[] deployedShips;
 
     @Override
-    public void displayGrid(CellType[][] grid) {
+    public void displayGrid(CellType[][] grid, Collection<Ship> deployedShips) {
         this.latestGrid = grid;
+        this.deployedShips = deployedShips.toArray(new Ship[0]);
     }
 
     @Override

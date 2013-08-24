@@ -1,5 +1,8 @@
 package com.cjra.battleships;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DeploymentController {
     private final DeploymentView view;
     private final DeploymentModel model;
@@ -25,7 +28,7 @@ public class DeploymentController {
     }
 
     private void updateView() {
-        view.displayGrid(model.getGrid());
+        view.displayGrid(model.getGrid(), model.getDeployedShips());
         view.offerShipPlacement(model.getShipOffer());
         view.displayAvailableShips(model.getAvailableShips());
     }

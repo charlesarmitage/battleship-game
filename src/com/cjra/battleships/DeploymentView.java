@@ -4,7 +4,7 @@ import java.util.Collection;
 
 public interface DeploymentView {
 
-    public void displayGrid(CellType [][] grid);
+    public void displayGrid(CellType[][] grid, Collection<Ship> deployedShips);
     public void offerShipPlacement(ShipType ship);
     public void displayAvailableShips(Collection<ShipType> availableShips);
 }

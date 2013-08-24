@@ -48,6 +48,14 @@ public class Selection {
         return false;
     }
 
+    public Position start() {
+        return selections.get(0);
+    }
+
+    public Position end() {
+        return selections.get(selections.size()-1);
+    }
+
     private boolean isEmpty(){
 
         return selections.size() == 0;
