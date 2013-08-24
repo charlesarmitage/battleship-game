@@ -6,7 +6,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
-public class ShipPlacementTests extends VerticalSelectionTests {
+public class ShipAvailablityTests extends VerticalSelectionTests {
 
     @Test
     public void noCellsSelected(){
@@ -75,5 +75,15 @@ public class ShipPlacementTests extends VerticalSelectionTests {
         deploymentController.placeShip(ShipType.DESTROYER);
 
         assertTrue(testView.availableShips.contains(ShipType.DESTROYER));
+    }
+
+    @Test
+    public void cannotPlaceShipOnASingleCellSelection(){
+        deploymentController.resetGrid();
+        deploymentController.selectCell(3,3);
+
+        deploymentController.placeShip(ShipType.PATROL_BOAT);
+
+        assertTrue(testView.availableShips.contains(ShipType.PATROL_BOAT));
     }
 }
