@@ -21,6 +21,8 @@ public class TestView implements DeploymentView {
     @Override
     public void displayShips(Collection<Ship> deployedShips) {
         this.deployedShips = deployedShips.toArray(new Ship[0]);
+        this.latestGrid = buildGrid();
+        this.latestGrid = getGrid(selection);
     }
 
     @Override
@@ -33,7 +35,7 @@ public class TestView implements DeploymentView {
         this.availableShips = availableShips;
     }
 
-    public CellType[][] getGrid(List<Position> selection) {
+    private CellType[][] getGrid(List<Position> selection) {
         for(Position position : selection){
             latestGrid[position.x][position.y] = CellType.SELECTED;
         }
