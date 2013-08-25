@@ -13,8 +13,8 @@ public class Selection {
         return selections.size();
     }
 
-    public Iterable<? extends Position> getPositions() {
-        return selections;
+    public List<Position> getPositions() {
+        return Collections.unmodifiableList(selections);
     }
 
     public void select(int x, int y){
@@ -57,7 +57,6 @@ public class Selection {
     }
 
     private boolean isEmpty(){
-
         return selections.size() == 0;
     }
 

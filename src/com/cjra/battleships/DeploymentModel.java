@@ -8,7 +8,7 @@ import java.util.List;
 public class DeploymentModel {
     private Selection selection = new Selection();
     private List<ShipType> availableShips = new ArrayList<ShipType>();
-    private Ship currentShip;
+    private List<Ship> deployedShips = new ArrayList<Ship>();
 
     public DeploymentModel(){
         availableShips.add(ShipType.PATROL_BOAT);
@@ -26,11 +26,12 @@ public class DeploymentModel {
         for(Position position : selection.getPositions()){
             currentGrid[position.x][position.y] = CellType.SELECTED;
         }
-        if(currentShip != null){
-        for(Position position : currentShip.getPositions()){
-            currentGrid[position.x][position.y] = CellType.SHIP;
+        for(Ship ship : deployedShips){
+            for(Position position : ship.getPositions()){
+                currentGrid[position.x][position.y] = CellType.SHIP;
+            }
         }
-        }
+
         return currentGrid;
     }
 
@@ -73,7 +74,7 @@ public class DeploymentModel {
 
         if(getShipOffer() == ship){
             availableShips.remove(ship);
-            currentShip = ShipBuilder.buildShip(ship, selection);
+            deployedShips.add(ShipBuilder.buildShip(ship, selection));
             selection = new Selection();
         }
     }
@@ -83,11 +84,7 @@ public class DeploymentModel {
     }
 
     public Collection<Ship> getDeployedShips() {
-        List<Ship> ships = new ArrayList<Ship>();
-        if(currentShip != null){
-            ships.add(currentShip);
-        }
-        return ships;
+        return deployedShips;
     }
 
     private CellType[][] buildGrid() {
