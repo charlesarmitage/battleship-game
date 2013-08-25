@@ -21,20 +21,6 @@ public class DeploymentModel {
         selection = new Selection();
     }
 
-    public CellType[][] getGrid() {
-        CellType[][] currentGrid = buildGrid();
-        for(Position position : selection.getPositions()){
-            currentGrid[position.x][position.y] = CellType.SELECTED;
-        }
-        for(Ship ship : deployedShips){
-            for(Position position : ship.getPositions()){
-                currentGrid[position.x][position.y] = CellType.SHIP;
-            }
-        }
-
-        return currentGrid;
-    }
-
     public void pickCell(int x, int y){
 
         if(!selection.isSelected(x, y)) {
@@ -102,15 +88,5 @@ public class DeploymentModel {
 
     public Collection<Ship> getDeployedShips() {
         return deployedShips;
-    }
-
-    private CellType[][] buildGrid() {
-        CellType[][] grid = new CellType[10][10];
-        for(int x = 0; x < 10; x++){
-            for(int y = 0; y < 10; y++){
-                grid[x][y] = CellType.EMPTY;
-            }
-        }
-        return grid;
     }
 }

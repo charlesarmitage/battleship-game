@@ -13,7 +13,6 @@ public class DeployedShipSelectionTests extends ShipDeploymentTests {
         deploymentController.selectCell(4,4);
         deploymentController.selectCell(4,5);
 
-        assertOtherCellsEmpty(expectedSelections.toArray(new Position[0]));
         assertEquals(0, testView.selection.size());
     }
 }
