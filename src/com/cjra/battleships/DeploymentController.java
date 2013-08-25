@@ -29,6 +29,7 @@ public class DeploymentController {
 
     private void updateView() {
         view.displayGrid(model.getGrid(), model.getDeployedShips());
+        view.displaySelection(model.getSelection());
         view.offerShipPlacement(model.getShipOffer());
         view.displayAvailableShips(model.getAvailableShips());
     }

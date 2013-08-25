@@ -38,11 +38,24 @@ public class DeploymentModel {
     public void pickCell(int x, int y){
 
         if(!selection.isSelected(x, y)) {
-            selection.select(x, y);
+            if(isEmpty(new Position(x,y))){
+                selection.select(x, y);
+            }
         }
         else {
             selection.clear(x, y);
         }
+    }
+
+    private boolean isEmpty(Position position) {
+        for(Ship ship : deployedShips){
+            for(Position shipPosition : ship.getPositions()){
+                if(shipPosition.matches(position.x, position.y)){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public ShipType getShipOffer() {
@@ -77,6 +90,10 @@ public class DeploymentModel {
             deployedShips.add(ShipBuilder.buildShip(ship, selection));
             selection = new Selection();
         }
+    }
+
+    public List<Position> getSelection() {
+        return selection.getPositions();
     }
 
     public Collection<ShipType> getAvailableShips() {
