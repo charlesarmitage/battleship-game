@@ -22,6 +22,9 @@ public class DeploymentController {
     public void placeShip(ShipType ship) {
         model.placeShip(ship);
         updateView();
+        if(model.AllShipsPlaced()){
+            view.offerGameStart();
+        }
     }
 
     private void updateView() {

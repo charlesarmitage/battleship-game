@@ -3,3 +3,4 @@ Deployment Items
 
 1. Deploy all ships and offer to start the game.
 2. Select a ship and offer to delete.
+3. Clear all ships and selection resulting in empty grid.

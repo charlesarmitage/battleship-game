@@ -86,4 +86,33 @@ public class ShipDeploymentTests extends VerticalSelectionTests {
         assertEquals(0, testView.selection.size());
         assertEquals(4, testView.availableShips.size());
     }
+
+    @Test
+    public void deployingAllShipsOffersGame(){
+        deploymentController.resetGrid();
+        deploymentController.selectCell(0,0);
+        deploymentController.selectCell(0,1);
+        deploymentController.placeShip(ShipType.PATROL_BOAT);
+
+        deploymentController.selectCell(1,0);
+        deploymentController.selectCell(1,1);
+        deploymentController.selectCell(1,2);
+        deploymentController.placeShip(ShipType.DESTROYER);
+
+        deploymentController.selectCell(3,0);
+        deploymentController.selectCell(3,1);
+        deploymentController.selectCell(3,2);
+        deploymentController.selectCell(3,3);
+        deploymentController.placeShip(ShipType.BATTLESHIP);
+
+        deploymentController.selectCell(4,0);
+        deploymentController.selectCell(4,1);
+        deploymentController.selectCell(4,2);
+        deploymentController.selectCell(4,3);
+        deploymentController.selectCell(4,4);
+        deploymentController.placeShip(ShipType.AIRCRAFT_CARRIER);
+
+        assertEquals(4, testView.deployedShips.length);
+        assertTrue(testView.canStartGame);
+    }
 }

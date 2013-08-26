@@ -10,6 +10,7 @@ public class TestView implements DeploymentView {
     public Collection<ShipType> availableShips = new ArrayList<ShipType>();
     public Ship[] deployedShips;
     public List<Position> selection = new ArrayList<Position>();
+    public boolean canStartGame = false;
 
     @Override
     public void displaySelection(List<Position> selection) {
@@ -28,6 +29,11 @@ public class TestView implements DeploymentView {
     @Override
     public void offerShipPlacement(ShipType ship) {
         offeredShip = ship;
+    }
+
+    @Override
+    public void offerGameStart() {
+        canStartGame = true;
     }
 
     @Override

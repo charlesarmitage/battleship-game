@@ -96,4 +96,8 @@ public class DeploymentModel {
     public Collection<Ship> getDeployedShips() {
         return deployedShips;
     }
+
+    public boolean AllShipsPlaced() {
+        return !availableShips.isEmpty();
+    }
 }
