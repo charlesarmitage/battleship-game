@@ -160,4 +160,41 @@ public class Selection {
             }
         };
     }
+
+    public boolean shortEnough(List<ShipType> availableShips) {
+        if(availableShips.isEmpty()){
+            return false;
+        }
+
+        int longestShip = getMaximumShipLength(availableShips);
+        return selections.isEmpty() || selections.size() < longestShip;
+    }
+
+    private int getMaximumShipLength(List<ShipType> availableShips) {
+        int length = 0;
+        for(ShipType ship : availableShips){
+            length = Math.max(length, getShipLength(ship));
+        }
+        return length;
+    }
+
+    private int getShipLength(ShipType ship) {
+        int length = 0;
+        switch(ship)
+        {
+            case PATROL_BOAT:
+                length = 2;
+                break;
+            case DESTROYER:
+                length = 3;
+                break;
+            case BATTLESHIP:
+                length = 4;
+                break;
+            case AIRCRAFT_CARRIER:
+                length = 5;
+                break;
+        }
+        return length;
+    }
 }

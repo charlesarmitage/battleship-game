@@ -31,8 +31,10 @@ public class DeploymentModel {
     public void pickCell(int x, int y){
 
         if(!selection.isSelected(x, y)) {
-            if(isEmpty(new Position(x,y))){
-                selection.select(x, y);
+            if(selection.shortEnough(availableShips)){
+                if(isEmpty(new Position(x,y))){
+                    selection.select(x, y);
+                }
             }
         }
         else {
