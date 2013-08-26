@@ -11,6 +11,10 @@ public class DeploymentModel {
     private List<Ship> deployedShips = new ArrayList<Ship>();
 
     public DeploymentModel(){
+        addAllAvailableShips();
+    }
+
+    private void addAllAvailableShips() {
         availableShips.add(ShipType.PATROL_BOAT);
         availableShips.add(ShipType.DESTROYER);
         availableShips.add(ShipType.BATTLESHIP);
@@ -19,6 +23,9 @@ public class DeploymentModel {
 
     public void reset() {
         selection = new Selection();
+        deployedShips = new ArrayList<Ship>();
+        availableShips = new ArrayList<ShipType>();
+        addAllAvailableShips();
     }
 
     public void pickCell(int x, int y){

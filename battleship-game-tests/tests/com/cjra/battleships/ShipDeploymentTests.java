@@ -75,4 +75,15 @@ public class ShipDeploymentTests extends VerticalSelectionTests {
 
         assertEquals(2, testView.deployedShips.length);
     }
+
+    @Test
+    public void clearDeployment(){
+        deployPatrolBoatAndDestroyer();
+
+        deploymentController.resetGrid();
+
+        assertEquals(0, testView.deployedShips.length);
+        assertEquals(0, testView.selection.size());
+        assertEquals(4, testView.availableShips.size());
+    }
 }
