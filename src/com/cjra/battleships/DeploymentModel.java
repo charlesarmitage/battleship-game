@@ -36,14 +36,8 @@ public class DeploymentModel {
     }
 
     private boolean isEmpty(Position position) {
-        for(Ship ship : deployedShips){
-            for(Position shipPosition : ship.getPositions()){
-                if(shipPosition.matches(position.x, position.y)){
-                    return false;
-                }
-            }
-        }
-        return true;
+        CellPlacer placer = new CellPlacer(deployedShips);
+        return placer.isAvailable(position) && placer.isInBounds(position.x, position.y);
     }
 
     public ShipType getShipOffer() {
@@ -71,7 +65,7 @@ public class DeploymentModel {
         return deployedShips;
     }
 
-    public boolean AllShipsPlaced() {
+    public boolean allShipsPlaced() {
         return !availableShips.isEmpty();
     }
 

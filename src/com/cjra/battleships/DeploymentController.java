@@ -22,7 +22,7 @@ public class DeploymentController {
     public void placeShip(ShipType ship) {
         model.placeShip(ship);
         updateView();
-        if(model.AllShipsPlaced()){
+        if(model.allShipsPlaced()){
             view.offerGameStart();
         }
     }

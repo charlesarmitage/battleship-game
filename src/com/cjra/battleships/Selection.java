@@ -67,10 +67,6 @@ public class Selection {
             return true;
         }
 
-        if(!isInBounds(x, y)){
-            return false;
-        }
-
         for(Position cell : potentialSelections){
             if(cell.matches(x, y)){
                 return true;
@@ -125,15 +121,7 @@ public class Selection {
     }
 
     private void addPotentialSelection(int x, int y) {
-
-        if(!isInBounds(x, y)){
-            return;
-        }
         potentialSelections.add(new Position(x, y));
-    }
-
-    private boolean isInBounds(int x, int y) {
-        return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
     private void sortSelections(){
