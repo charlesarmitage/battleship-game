@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Selection {
+public class Selection extends Positionable {
     private final List<Position> selections = new ArrayList<Position>();
     private final List<Position> potentialSelections = new ArrayList<Position>();
 
@@ -92,22 +92,12 @@ public class Selection {
             addPotentialHorizontalSelections(start(), end());
         }
 
-        if(selections.size() > 1){
-            if(isVertical()){
-                addPotentialVerticalSelections(start(), end());
-            }
-            else if(isHorizontal()){
-                addPotentialHorizontalSelections(start(), end());
-            }
+        if(isVertical()){
+            addPotentialVerticalSelections(start(), end());
         }
-    }
-
-    private boolean isHorizontal() {
-        return selections.get(0).y == selections.get(1).y;
-    }
-
-    private boolean isVertical() {
-        return selections.get(0).x == selections.get(1).x;
+        else if(isHorizontal()){
+            addPotentialHorizontalSelections(start(), end());
+        }
     }
 
     private void addPotentialHorizontalSelections(Position start, Position end) {
@@ -150,6 +140,7 @@ public class Selection {
         };
     }
 
+    //TODO: Refactor to ship length comparator
     public boolean isShortEnough(List<ShipType> availableShips) {
         if(availableShips.isEmpty()){
             return false;

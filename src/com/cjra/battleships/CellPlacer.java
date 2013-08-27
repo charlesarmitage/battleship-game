@@ -4,16 +4,16 @@ import java.util.List;
 
 public class CellPlacer {
 
-    private List<Ship> deployables;
+    private List<? extends Positionable> deployables;
 
-    public CellPlacer(List<Ship> ships){
+    public CellPlacer(List<? extends Positionable> ships){
         this.deployables = ships;
     }
 
     public boolean isAvailable(Position position){
-        for(Ship ship : deployables){
-            for(Position shipPosition : ship.getPositions()){
-                if(shipPosition.matches(position.x, position.y)){
+        for(Positionable deployed : deployables){
+            for(Position deployedPositions : deployed.getPositions()){
+                if(deployedPositions.matches(position.x, position.y)){
                     return false;
                 }
             }

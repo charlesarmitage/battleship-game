@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Ship {
+public class Ship extends Positionable {
     private final ShipType type;
     private List<Position> positions = new ArrayList< Position >();
 
@@ -13,6 +13,7 @@ public class Ship {
         this.positions = positions;
     }
 
+    @Override
     public List<Position> getPositions() {
         return Collections.unmodifiableList(positions);
     }
