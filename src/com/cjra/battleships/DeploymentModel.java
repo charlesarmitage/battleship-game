@@ -14,13 +14,6 @@ public class DeploymentModel {
         addAllAvailableShips();
     }
 
-    private void addAllAvailableShips() {
-        availableShips.add(ShipType.PATROL_BOAT);
-        availableShips.add(ShipType.DESTROYER);
-        availableShips.add(ShipType.BATTLESHIP);
-        availableShips.add(ShipType.AIRCRAFT_CARRIER);
-    }
-
     public void reset() {
         selection = new Selection();
         deployedShips = new ArrayList<Ship>();
@@ -31,7 +24,7 @@ public class DeploymentModel {
     public void pickCell(int x, int y){
 
         if(!selection.isSelected(x, y)) {
-            if(selection.shortEnough(availableShips)){
+            if(selection.isShortEnough(availableShips)){
                 if(isEmpty(new Position(x,y))){
                     selection.select(x, y);
                 }
@@ -54,28 +47,7 @@ public class DeploymentModel {
     }
 
     public ShipType getShipOffer() {
-
-        ShipType type = ShipType.NONE;
-
-        switch(selection.size())
-        {
-            case 2:
-                type = ShipType.PATROL_BOAT;
-                break;
-            case 3:
-                type = ShipType.DESTROYER;
-                break;
-            case 4:
-                type = ShipType.BATTLESHIP;
-                break;
-            case 5:
-                type = ShipType.AIRCRAFT_CARRIER;
-                break;
-            default:
-                break;
-        }
-
-        return type;
+        return ShipDetails.getShipForLength(selection.size());
     }
 
     public void placeShip(ShipType ship) {
@@ -101,5 +73,12 @@ public class DeploymentModel {
 
     public boolean AllShipsPlaced() {
         return !availableShips.isEmpty();
+    }
+
+    private void addAllAvailableShips() {
+        availableShips.add(ShipType.PATROL_BOAT);
+        availableShips.add(ShipType.DESTROYER);
+        availableShips.add(ShipType.BATTLESHIP);
+        availableShips.add(ShipType.AIRCRAFT_CARRIER);
     }
 }

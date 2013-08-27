@@ -36,6 +36,7 @@ public class Selection {
         else if(end.matches(x,y)){
             selections.remove(end);
         }
+        updatePotentialSelections(x, y);
     }
 
     public boolean isSelected(int x, int y) {
@@ -161,39 +162,19 @@ public class Selection {
         };
     }
 
-    public boolean shortEnough(List<ShipType> availableShips) {
+    public boolean isShortEnough(List<ShipType> availableShips) {
         if(availableShips.isEmpty()){
             return false;
         }
 
         int longestShip = getMaximumShipLength(availableShips);
-        return selections.isEmpty() || selections.size() < longestShip;
+        return selections.size() < longestShip;
     }
 
     private int getMaximumShipLength(List<ShipType> availableShips) {
         int length = 0;
         for(ShipType ship : availableShips){
-            length = Math.max(length, getShipLength(ship));
-        }
-        return length;
-    }
-
-    private int getShipLength(ShipType ship) {
-        int length = 0;
-        switch(ship)
-        {
-            case PATROL_BOAT:
-                length = 2;
-                break;
-            case DESTROYER:
-                length = 3;
-                break;
-            case BATTLESHIP:
-                length = 4;
-                break;
-            case AIRCRAFT_CARRIER:
-                length = 5;
-                break;
+            length = Math.max(length, ShipDetails.getShipLength(ship));
         }
         return length;
     }
