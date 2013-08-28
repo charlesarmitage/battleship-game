@@ -2,7 +2,6 @@ package com.cjra.battleships;
 
 import org.junit.Test;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -40,7 +39,7 @@ public class ShipDeploymentTests extends VerticalSelectionTests {
 
         assertEquals(2, positions.size());
         assertTrue(positions.get(0).matches(4,4));
-        assertTrue(positions.get(1).matches(4,5));
+        assertTrue(positions.get(1).matches(4, 5));
     }
 
     @Test
@@ -59,7 +58,7 @@ public class ShipDeploymentTests extends VerticalSelectionTests {
         List<Position> positions = testView.deployedShips[0].getPositions();
 
         assertEquals(3, positions.size());
-        assertTrue(positions.get(0).matches(4,4));
+        assertTrue(positions.get(0).matches(4, 4));
         assertTrue(positions.get(1).matches(4,5));
         assertTrue(positions.get(2).matches(4,6));
     }
