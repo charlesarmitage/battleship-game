@@ -1,5 +1,7 @@
 package com.cjra.battleships;
 
+import java.util.List;
+
 public class ShipDetails {
 
     public static int getShipLength(ShipType ship) {
@@ -45,5 +47,13 @@ public class ShipDetails {
         }
 
         return type;
+    }
+
+    public static int getMaximumShipLength(List<ShipType> availableShips) {
+        int length = 0;
+        for(ShipType ship : availableShips){
+            length = Math.max(length, ShipDetails.getShipLength(ship));
+        }
+        return length;
     }
 }

@@ -8,6 +8,11 @@ import java.util.List;
 public class Selection extends Positionable {
     private final List<Position> selections = new ArrayList<Position>();
     private final List<Position> potentialSelections = new ArrayList<Position>();
+    private final int maximumSize;
+
+    public Selection(int maximumSize){
+        this.maximumSize = maximumSize;
+    }
 
     public int size() {
         return selections.size();
@@ -19,7 +24,7 @@ public class Selection extends Positionable {
 
     public void select(int x, int y){
 
-        if(isPotentialSelection(x, y)) {
+        if(isValidSelection(x, y)) {
             addSelection(x, y);
             updatePotentialSelections(x, y);
         }
@@ -61,7 +66,11 @@ public class Selection extends Positionable {
         return selections.size() == 0;
     }
 
-    private boolean isPotentialSelection(int x, int y) {
+    private boolean isValidSelection(int x, int y) {
+
+        if(!isShortEnough()){
+            return false;
+        }
 
         if(isEmpty()){
             return true;
@@ -73,6 +82,10 @@ public class Selection extends Positionable {
             }
         }
         return false;
+    }
+
+    private boolean isShortEnough() {
+        return selections.size() < maximumSize;
     }
 
     private void addSelection(int x, int y) {
@@ -138,23 +151,5 @@ public class Selection extends Positionable {
                 return one.y - other.y;
             }
         };
-    }
-
-    //TODO: Refactor to ship length comparator
-    public boolean isShortEnough(List<ShipType> availableShips) {
-        if(availableShips.isEmpty()){
-            return false;
-        }
-
-        int longestShip = getMaximumShipLength(availableShips);
-        return selections.size() < longestShip;
-    }
-
-    private int getMaximumShipLength(List<ShipType> availableShips) {
-        int length = 0;
-        for(ShipType ship : availableShips){
-            length = Math.max(length, ShipDetails.getShipLength(ship));
-        }
-        return length;
     }
 }

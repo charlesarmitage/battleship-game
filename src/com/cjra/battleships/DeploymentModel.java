@@ -6,28 +6,27 @@ import java.util.Collections;
 import java.util.List;
 
 public class DeploymentModel {
-    private Selection selection = new Selection();
+    private Selection selection;
     private List<ShipType> availableShips = new ArrayList<ShipType>();
     private List<Ship> deployedShips = new ArrayList<Ship>();
 
     public DeploymentModel(){
         addAllAvailableShips();
+        buildNewSelection();
     }
 
     public void reset() {
-        selection = new Selection();
         deployedShips = new ArrayList<Ship>();
         availableShips = new ArrayList<ShipType>();
         addAllAvailableShips();
+        buildNewSelection();
     }
 
     public void pickCell(int x, int y){
 
         if(!selection.isSelected(x, y)) {
-            if(selection.isShortEnough(availableShips)){
-                if(isEmpty(new Position(x,y))){
-                    selection.select(x, y);
-                }
+            if(isEmpty(new Position(x,y))){
+                selection.select(x, y);
             }
         }
         else {
@@ -49,7 +48,7 @@ public class DeploymentModel {
         if(getShipOffer() == ship){
             availableShips.remove(ship);
             deployedShips.add(ShipBuilder.buildShip(ship, selection));
-            selection = new Selection();
+            buildNewSelection();
         }
     }
 
@@ -67,6 +66,10 @@ public class DeploymentModel {
 
     public boolean allShipsPlaced() {
         return !availableShips.isEmpty();
+    }
+
+    private void buildNewSelection() {
+        selection = new Selection(ShipDetails.getMaximumShipLength(availableShips));
     }
 
     private void addAllAvailableShips() {
