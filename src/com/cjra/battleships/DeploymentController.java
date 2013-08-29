@@ -32,5 +32,6 @@ public class DeploymentController {
         view.displaySelection(model.getSelection());
         view.offerShipPlacement(model.getShipOffer());
         view.displayAvailableShips(model.getAvailableShips());
+        view.refreshView();
     }
 }

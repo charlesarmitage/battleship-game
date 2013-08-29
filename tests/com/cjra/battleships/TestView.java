@@ -13,17 +13,13 @@ public class TestView implements DeploymentView {
     public boolean canStartGame = false;
 
     @Override
-    public void displaySelection(List<Position> selection) {
-        this.selection = selection;
-        this.latestGrid = buildGrid();
-        this.latestGrid = getGrid(selection);
+    public void displaySelection(Positionable selection) {
+        this.selection = selection.getPositions();
     }
 
     @Override
-    public void displayShips(Collection<Ship> deployedShips) {
+    public void displayShips(Collection<? extends Positionable> deployedShips) {
         this.deployedShips = deployedShips.toArray(new Ship[0]);
-        this.latestGrid = buildGrid();
-        this.latestGrid = getGrid(selection);
     }
 
     @Override
@@ -34,6 +30,12 @@ public class TestView implements DeploymentView {
     @Override
     public void offerGameStart() {
         canStartGame = true;
+    }
+
+    @Override
+    public void refreshView() {
+        this.latestGrid = buildGrid();
+        this.latestGrid = getGrid(this.selection);
     }
 
     @Override

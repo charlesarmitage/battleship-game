@@ -52,8 +52,8 @@ public class DeploymentModel {
         }
     }
 
-    public List<Position> getSelection() {
-        return selection.getPositions();
+    public Positionable getSelection() {
+        return selection;
     }
 
     public Collection<ShipType> getAvailableShips() {
