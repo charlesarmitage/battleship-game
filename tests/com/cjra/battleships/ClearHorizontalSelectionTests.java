@@ -38,6 +38,23 @@ public class ClearHorizontalSelectionTests extends HorizontalSelectionTests{
     }
 
     @Test
+    public void tryClearingMiddleCellFails(){
+        deploymentController.resetGrid();
+        deploymentController.selectCell(3, 1);
+        deploymentController.selectCell(4, 1);
+        deploymentController.selectCell(2,1);
+        expectedSelections.add(new Position(3,1));
+        expectedSelections.add(new Position(4,1));
+        expectedSelections.add(new Position(2,1));
+
+
+        deploymentController.selectCell(3,1);
+
+        assertEquals(CellType.SELECTED, testView.latestGrid[3][1]);
+    }
+
+
+    @Test
     public void clearSelection(){
         clearLeftHandCell();
 

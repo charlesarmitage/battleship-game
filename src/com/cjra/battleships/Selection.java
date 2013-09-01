@@ -140,7 +140,7 @@ public class Selection extends Positionable {
         return new Comparator<Position>() {
             @Override
             public int compare(Position one, Position other) {
-                return one.x - other.y;
+                return one.x - other.x;
             }
         };
     }
