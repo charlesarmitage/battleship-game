@@ -40,7 +40,11 @@ public class DeploymentModel {
     }
 
     public ShipType getShipOffer() {
-        return ShipDetails.getShipForLength(selection.size());
+        ShipType shipOffer = ShipDetails.getShipForLength(selection.size());
+        if(!availableShips.contains(shipOffer)){
+            return ShipType.NONE;
+        }
+        return shipOffer;
     }
 
     public void placeShip(ShipType ship) {

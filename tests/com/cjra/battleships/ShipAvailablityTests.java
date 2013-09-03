@@ -52,6 +52,19 @@ public class ShipAvailablityTests extends VerticalSelectionTests {
     }
 
     @Test
+    public void deployedShipsNotOffered(){
+        placeDestroyerOffered();
+        deploymentController.placeShip(ShipType.DESTROYER);
+        testView.offeredShip = ShipType.NONE;
+
+        deploymentController.selectCell(0,0);
+        deploymentController.selectCell(0,1);
+        deploymentController.selectCell(0,2);
+
+        assertEquals(ShipType.NONE, testView.offeredShip);
+    }
+
+    @Test
     public void allShipsAvailableToPlace(){
 
         assertTrue(testView.availableShips.contains(ShipType.PATROL_BOAT));
