@@ -69,7 +69,7 @@ public class DeploymentModel {
     }
 
     public boolean allShipsPlaced() {
-        return !availableShips.isEmpty();
+        return availableShips.isEmpty();
     }
 
     private void buildNewSelection() {

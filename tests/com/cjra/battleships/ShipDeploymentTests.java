@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 public class ShipDeploymentTests extends VerticalSelectionTests {
@@ -84,6 +85,13 @@ public class ShipDeploymentTests extends VerticalSelectionTests {
         assertEquals(0, testView.deployedShips.length);
         assertEquals(0, testView.selection.size());
         assertEquals(4, testView.availableShips.size());
+    }
+
+    @Test
+    public void deployingSomeShipsDoesNotOfferTheGame(){
+        deployPatrolBoatAndDestroyer();
+
+        assertFalse(testView.canStartGame);
     }
 
     @Test
