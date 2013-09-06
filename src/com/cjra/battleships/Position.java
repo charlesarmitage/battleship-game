@@ -12,5 +12,9 @@ public class Position {
     public boolean matches(int x, int y){
         return this.x == x && this.y == y;
     }
+
+    public boolean matches(Position position) {
+        return this.matches(position.x, position.y);
+    }
 }
 
